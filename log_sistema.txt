@@ -1,0 +1,12 @@
+2025-06-03 21:23:56,814 ERROR: No se pudo cargar credenciales: [Errno 2] No such file or directory: 'credenciales.json'
+2025-06-03 21:24:05,637 ERROR: No se pudo cargar credenciales: [Errno 2] No such file or directory: 'credenciales.json'
+2025-06-03 21:24:40,430 ERROR: No se pudo cargar credenciales: [Errno 2] No such file or directory: 'credenciales.json'
+2025-06-03 21:24:44,401 ERROR: No se pudo cargar credenciales: [Errno 2] No such file or directory: 'credenciales.json'
+2025-06-03 21:24:49,491 ERROR: No se pudo cargar credenciales: [Errno 2] No such file or directory: 'credenciales.json'
+2025-06-03 21:38:55,785 INFO: Credenciales cargadas correctamente.
+2025-06-03 21:40:27,287 INFO: Credenciales cargadas correctamente.
+2025-06-03 21:41:51,524 INFO: Credenciales cargadas correctamente.
+2025-06-03 21:43:45,708 INFO: Credenciales cargadas correctamente.
+2025-06-03 21:50:21,687 INFO: Credenciales cargadas correctamente.
+2025-06-03 21:53:37,364 INFO: Credenciales cargadas correctamente.
+2025-06-03 21:57:21,475 INFO: Credenciales cargadas correctamente.
