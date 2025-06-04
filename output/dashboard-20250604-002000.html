@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control de Contratos - UTI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: url("https://scontent.faqp3-1.fna.fbcdn.net/v/t39.30808-6/479523307_1532005674284025_5943725267955764247_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Wc0GqEDJ69wQ7kNvwG5La8r&_nc_oc=Adke6a7ejsUCx3Nuzp1VVgmJdSVktavfQTO5vxZXMf_mAQaZSea7ApxnPMqWCJps1NUrelBISkHF1WYHJJd_heTO&_nc_zt=23&_nc_ht=scontent.faqp3-1.fna&_nc_gid=tTujJm15bFoKYbsv3VR6Ng&oh=00_AfLnH2loM_XfHkawVfweg7ksflEkulCTOy0m2Q7-Jhdq6w&oe=6839AE18") no-repeat center center fixed;
+        background-size: cover;
+        color: #2c3e50;
+      }
+      .modern-table th, .modern-table td { vertical-align: middle; }
+      .modern-table th { background: #1976d2; color: #fff; font-weight: 600; }
+      .modern-table tr:nth-child(even) { background: #f2f6fc; }
+      .modern-table tr:hover { background: #e3eafc; }
+      .table-container { margin-top: 2rem; }
+      h3 { color: #1976d2; font-weight: 600; margin-top: 2rem; }
+      .chart-container { margin: 2rem auto; max-width: 700px; background: #fff; border-radius: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 2rem; }
+      /* Nueva sección de filtros modernos */
+      .filters-section {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+      }
+      .filters-header {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        background: #1976d2;
+        color: #fff;
+        border-radius: 10px;
+      }
+      .filters-title {
+        margin: 0;
+        font-weight: 500;
+        font-size: 1.2rem;
+      }
+      .collapse-icon {
+        transition: transform 0.3s;
+      }
+      .collapse-icon.collapsed {
+        transform: rotate(-180deg);
+      }
+      .filter-content {
+        display: none;
+        padding: 1rem 0;
+      }
+      .filter-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+      .filter-group {
+        display: flex;
+        flex-direction: column;
+      }
+      .filter-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+      .modern-select, .modern-input {
+        padding: 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 8px;
+        transition: border-color 0.3s;
+      }
+      .modern-select:focus, .modern-input:focus {
+        border-color: #1976d2;
+        outline: none;
+      }
+      /* Estilos para el gráfico */
+      #contratosChart {
+        border-radius: 12px;
+        background: #fff;
+        padding: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      /* Estilos para las tablas modernizadas */
+      .table-container {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        overflow: hidden;
+      }
+      .table-header {
+        background: #1976d2;
+        color: #fff;
+        padding: 1rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .table-header i {
+        font-size: 1.2rem;
+      }
+      .table-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-top: 1px solid #e9ecef;
+      }
+      .table-filter-group {
+        display: flex;
+        flex-direction: column;
+      }
+      .table-filter-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+      .table-filter-select {
+        padding: 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 8px;
+        transition: border-color 0.3s;
+      }
+      .table-filter-select:focus {
+        border-color: #1976d2;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="d-flex align-items-center gap-3 mb-4">
+        <img src="UTI.jpg" alt="Logo UTI" width="70" />
+        <h1 class="m-0">Control de Contratos - UTI</h1>
+      </div>
+      <!-- Nueva sección de filtros modernos -->
+      <div class="filters-section">
+        <div class="filters-header" onclick="toggleFilters()">
+          <i class="fas fa-filter"></i>
+          <h3 class="filters-title">Filtros y Configuración</h3>
+          <i class="fas fa-chevron-down collapse-icon" id="collapseIcon"></i>
+        </div>
+        <div class="filter-content" id="filterContent">
+          <div class="filter-grid">
+            <div class="filter-group">
+              <label class="filter-label">
+                <i class="fas fa-chart-bar"></i> Filtrar por estado:
+              </label>
+              <select class="modern-select" id="filtro-estado" onchange="aplicarFiltros()">
+                <option value="todos">📊 Mostrar todos</option>
+                <option value="vencido">⚠️ Contratos vencidos</option>
+                <option value="vencen7">⏰ Vencen en 7 días</option>
+                <option value="vencen1">🔴 Vencen mañana</option>
+                <option value="suspender">🚫 Se suspenden hoy</option>
+                <option value="nuevos">✨ Usuarios nuevos</option>
+                <option value="notificados">📧 Notificados</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label class="filter-label">
+                <i class="fas fa-calendar-alt"></i> Período de análisis:
+              </label>
+              <select class="modern-select" id="filtro-periodo" onchange="aplicarFiltros()">
+                <option value="actual">Estado Actual</option>
+                <option value="semanal">Próximos 7 días</option>
+                <option value="mensual">Próximo mes</option>
+                <option value="trimestral">Próximo trimestre</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label class="filter-label">
+                <i class="fas fa-bell"></i> Fecha de vencimiento (notificados):
+              </label>
+              <input type="date" class="modern-input" id="fecha-vencimiento" onchange="aplicarFiltros()" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- GRÁFICO PRINCIPAL -->
+      <div class="chart-container">
+        <h4 class="text-center mb-3" style="font-weight: 600; color: #2c3e50">Estado de Contratos</h4>
+        <canvas id="contratosChart"></canvas>
+      </div>
+      <!-- TABLAS MODERNIZADAS -->
+      <div id="tabla-vencidos" class="table-container" style="display: none">
+        <div class="table-header">
+          <i class="fas fa-exclamation-triangle"></i>
+          Usuarios con contrato vencido
+        </div>
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>NOMBRE</th>
+              <th>TELÉFONO</th>
+              <th>FECHA VENCIMIENTO</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+      </div>
+      <div id="tabla-7dias" class="table-container" style="display: none">
+        <div class="table-header">
+          <i class="fas fa-clock"></i>
+          Usuarios que vencen en 7 días
+        </div>
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>NOMBRE</th>
+              <th>TELÉFONO</th>
+              <th>FECHA VENCIMIENTO</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+      </div>
+      <div id="tabla-1dia" class="table-container">
+        <div class="table-header">
+          <i class="fas fa-exclamation-circle"></i>
+          Usuarios que vencen en 1 día
+        </div>
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>NOMBRE</th>
+              <th>TELÉFONO</th>
+              <th>FECHA VENCIMIENTO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>PAREDES GUTIERREZ YESICA</td><td>937510272</td><td>2025-06-05</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="tabla-suspender" class="table-container" style="display: none">
+        <div class="table-header">
+          <i class="fas fa-ban"></i>
+          Usuarios que se suspenderán hoy
+        </div>
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>NOMBRE</th>
+              <th>CORREO</th>
+              <th>FECHA VENCIMIENTO</th>
+              <th>TIEMPO</th>
+              <th>ESTADO</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+      </div>
+      <div id="tabla-nuevos" class="table-container" style="display: none">
+        <div class="table-header">
+          <i class="fas fa-star"></i>
+          Usuarios Nuevos
+        </div>
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>NOMBRE</th>
+              <th>TELÉFONO</th>
+              <th>FECHA VENCIMIENTO</th>
+              <th>MENSAJE ENVIADO</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{TABLA_NUEVOS}}
+          </tbody>
+        </table>
+      </div>
+      <div id="tabla-notificados" class="table-container">
+        <div class="table-header">
+          <i class="fas fa-bell"></i>
+          Usuarios notificados
+        </div>
+        <div class="table-filters">
+          <div class="table-filter-group">
+            <label class="table-filter-label">Período</label>
+            <select class="table-filter-select" id="filtro-notificados-periodo" onchange="filtrarNotificados()">
+              <option value="7dias">Últimos 7 días</option>
+              <option value="30dias">Últimos 30 días</option>
+              <option value="anual">Anual</option>
+            </select>
+          </div>
+          <div class="table-filter-group">
+            <label class="table-filter-label">Estado</label>
+            <select class="table-filter-select" id="filtro-notificados-estado" onchange="filtrarNotificados()">
+              <option value="todos">Todos</option>
+              <option value="notificado">Notificado</option>
+              <option value="confirmado">Confirmado</option>
+            </select>
+          </div>
+        </div>
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>NOMBRE</th>
+              <th>CORREO</th>
+              <th>FECHA VENCIMIENTO</th>
+              <th>MENSAJE</th>
+              <th>ESTADO</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-notificados-body">
+            {{TABLA_NOTIFICADOS}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      const ctx = document.getElementById("contratosChart").getContext("2d");
+      const contratosChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: [
+            "Vencidos",
+            "Faltan 7 días",
+            "Falta 1 día",
+            "Suspendidos hoy",
+            "Usuarios nuevos",
+            "Notificados"
+          ],
+          datasets: [
+            {
+              label: "Usuarios",
+              data: [0, 0, 1, 0, 0, 0],
+              backgroundColor: [
+                "#e74c3c", "#f39c12", "#0096c7", "#e67e22", "#28a745", "#ff9f43"
+              ],
+              borderRadius: 12,
+              barThickness: 40
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: "#2c3e50",
+              titleColor: "#fff",
+              bodyColor: "#fff",
+              cornerRadius: 6,
+              padding: 10
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: "#2c3e50", font: { family: "Poppins", weight: "500" } },
+              grid: { color: "rgba(0, 0, 0, 0.05)" }
+            },
+            y: {
+              beginAtZero: true,
+              ticks: { color: "#2c3e50", font: { family: "Poppins", weight: "500" } },
+              grid: { color: "rgba(0, 0, 0, 0.05)" }
+            }
+          },
+          animation: { duration: 1200, easing: "easeOutBounce" }
+        }
+      });
+
+      function toggleFilters() {
+        const filterContent = document.getElementById("filterContent");
+        const collapseIcon = document.getElementById("collapseIcon");
+        const isCollapsed = filterContent.style.display === "none" || !filterContent.style.display;
+
+        filterContent.style.display = isCollapsed ? "grid" : "none";
+        collapseIcon.classList.toggle("collapsed", isCollapsed);
+      }
+
+      function aplicarFiltros() {
+        const estado = document.getElementById("filtro-estado").value;
+        const periodo = document.getElementById("filtro-periodo").value;
+        const fechaVencimiento = document.getElementById("fecha-vencimiento").value;
+
+        // Lógica para aplicar filtros a las tablas según los valores seleccionados
+        // ...
+      }
+
+      function filtrarNotificados() {
+        const periodo = document.getElementById("filtro-notificados-periodo").value;
+        const estado = document.getElementById("filtro-notificados-estado").value;
+
+        // Lógica para filtrar la tabla de notificados según los valores seleccionados
+        // ...
+      }
+
+      // Inicialización: mostrar solo la tabla de vencidos por defecto
+      document.getElementById("tabla-vencidos").style.display = "block";
+      document.getElementById("tabla-7dias").style.display = "none";
+      document.getElementById("tabla-1dia").style.display = "none";
+      document.getElementById("tabla-suspender").style.display = "none";
+      document.getElementById("tabla-nuevos").style.display = "none";
+      document.getElementById("tabla-notificados").style.display = "none";
+
+      // Mostrar u ocultar tablas según el filtro seleccionado
+      document.getElementById("filtro-estado").addEventListener("change", function() {
+        const valor = this.value;
+        const tablas = ["tabla-vencidos", "tabla-7dias", "tabla-1dia", "tabla-suspender", "tabla-nuevos", "tabla-notificados"];
+
+        tablas.forEach(function(tabla) {
+          document.getElementById(tabla).style.display = "none";
+        });
+
+        if (valor === "vencido") {
+          document.getElementById("tabla-vencidos").style.display = "block";
+        } else if (valor === "vencen7") {
+          document.getElementById("tabla-7dias").style.display = "block";
+        } else if (valor === "vencen1") {
+          document.getElementById("tabla-1dia").style.display = "block";
+        } else if (valor === "suspender") {
+          document.getElementById("tabla-suspender").style.display = "block";
+        } else if (valor === "nuevos") {
+          document.getElementById("tabla-nuevos").style.display = "block";
+        } else if (valor === "notificados") {
+          document.getElementById("tabla-notificados").style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>

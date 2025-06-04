@@ -10,3 +10,53 @@
 2025-06-03 21:50:21,687 INFO: Credenciales cargadas correctamente.
 2025-06-03 21:53:37,364 INFO: Credenciales cargadas correctamente.
 2025-06-03 21:57:21,475 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:02:36,080 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:05:21,307 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:12:34,857 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:18:07,032 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:18:12,711 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:21:35,613 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:40:19,009 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:43:06,788 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:45:47,232 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:47:18,189 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:50:35,091 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:53:12,733 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:54:42,652 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:55:52,432 INFO: Credenciales cargadas correctamente.
+2025-06-03 22:56:51,228 INFO: Credenciales cargadas correctamente.
+2025-06-03 23:03:30,192 INFO: Credenciales cargadas correctamente.
+2025-06-03 23:06:49,156 INFO: Credenciales cargadas correctamente.
+2025-06-03 23:07:48,273 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-03 23:08:11,024 INFO: Correo enviado a dencer15.921@gmail.com con asunto 'Bienvenido PAREDES GUTIERREZ YESICA'
+2025-06-03 23:09:54,697 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-03 23:10:02,122 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-03 23:17:31,968 INFO: Credenciales cargadas correctamente.
+2025-06-03 23:17:49,175 INFO: Correo enviado a dencer15.921@gmail.com con asunto 'Bienvenido PAREDES GUTIERREZ YESICA'
+2025-06-03 23:18:42,266 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-03 23:21:57,176 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-03 23:22:15,868 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-03 23:24:29,491 INFO: Credenciales cargadas correctamente.
+2025-06-03 23:24:59,542 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-03 23:35:09,959 INFO: Credenciales cargadas correctamente.
+2025-06-03 23:35:47,827 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-03 23:36:48,733 INFO: Credenciales cargadas correctamente.
+2025-06-03 23:37:15,544 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-03 23:39:12,240 INFO: Credenciales cargadas correctamente.
+2025-06-03 23:39:53,753 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-03 23:44:10,292 INFO: Credenciales cargadas correctamente.
+2025-06-03 23:45:28,393 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-03 23:48:36,725 INFO: Credenciales cargadas correctamente.
+2025-06-03 23:49:33,898 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-04 00:11:51,140 INFO: Credenciales cargadas correctamente.
+2025-06-04 00:16:17,582 INFO: Credenciales cargadas correctamente.
+2025-06-04 00:17:31,283 INFO: Credenciales cargadas correctamente.
+2025-06-04 00:19:06,633 INFO: Credenciales cargadas correctamente.
+2025-06-04 00:19:45,959 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-04 00:25:23,633 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-04 00:26:06,190 INFO: Credenciales cargadas correctamente.
+2025-06-04 00:26:30,176 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-04 00:37:13,034 INFO: Credenciales cargadas correctamente.
+2025-06-04 00:37:44,678 INFO: Mensaje WhatsApp enviado a +51937510272
+2025-06-04 00:44:52,537 INFO: Credenciales cargadas correctamente.
+2025-06-04 00:45:24,292 INFO: Mensaje WhatsApp enviado a +51937510272
